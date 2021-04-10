@@ -1,5 +1,7 @@
 package ui;
 
+import exceptions.InvalidDayException;
+import exceptions.UnderAgeException;
 import model.MinimarketManager;
 
 import java.time.LocalDate;
@@ -71,6 +73,13 @@ public class Main {
         }
         System.out.print("Id: ");
         String id = sc.nextLine();
-        manager.registerClient(type, id, LocalDate.now().getDayOfMonth());
+        try{
+            manager.registerClient(type, id, LocalDate.now().getDayOfMonth());
+        } catch (UnderAgeException e){
+            System.out.println("The client is under the permitted age.");
+        } catch (InvalidDayException e){
+            System.out.println("The client cant access to the market in this day.");
+        }
+
     }
 }
